@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ---------- Heart Shape Box ---------- */
+#heartBox {
+  width: 120px;
+  height: 120px;
+  background: #ff4d8d;
+  position: relative;
+  transform: rotate(-45deg);
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 25px rgba(255,77,141,0.7);
+  z-index: 5;
+}
+
+#heartBox::before,
+#heartBox::after {
+  content: "";
+  width: 120px;
+  height: 120px;
+  background: #ff4d8d;
+  border-radius: 50%;
+  position: absolute;
+}
+
+#heartBox::before {
+  top: -60px;
+  left: 0;
+}
+
+#heartBox::after {
+  left: 60px;
+  top: 0;
+}
+
+/* ---------- Pulse ---------- */
+@keyframes pulse {
+  0% { box-shadow: 0 0 20px rgba(255,77,141,0.6); }
+  50% { box-shadow: 0 0 50px rgba(255,77,141,1); }
+  100% { box-shadow: 0 0 20px rgba(255,77,141,0.6); }
+}
+
+#tapText {
+  position: absolute;
+  top: calc(50% + 120px);
+  color: pink;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* ---------- Light Burst ---------- */
+#light {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,182,193,0.95), transparent 60%);
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 3;
+}
+
+/* ---------- Message ---------- */
+#message {
+  position: absolute;
+  text-align: center;
+  color: #ffd1dc;
+  display: none;
+  z-index: 6;
+}
+
+#message h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.6rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- Floating Hearts & Balloons ---------- */
+.float {
+  position: fixed;
+  bottom: -50px;
+  animation: floatUp linear infinite;
+  z-index: 2;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+
+/* ---------- Roses ---------- */
+.rose {
+  position: fixed;
+  font-size: 36px;
+  z-index: 4;
+  animation: roseIn 3s forwards;
+}
+
+@keyframes roseIn {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------- Fireworks ---------- */
+canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+<div id="light"></div>
+
+<div id="heartBox"></div>
+<div id="tapText">Tap the heart 5 times 💕</div>
+
+<div id="message">
+  <h1>Happy New Year</h1>
+  <p>
+    to my most beautiful woman ❤️<br>
+    <strong>meri pasandida aurat</strong>
+  </p>
+</div>
+
+<script>
+/* ---------- Tap Logic ---------- */
+let taps = 0;
+const heartBox = document.getElementById("heartBox");
+const light = document.getElementById("light");
+
+heartBox.addEventListener("click", () => {
+  taps++;
+
+  light.style.opacity = "0.6";
+  setTimeout(() => light.style.opacity = "0", 300);
+
+  if (taps === 5) openHeart();
+});
+
+/* ---------- Open Heart ---------- */
+function openHeart() {
+  heartBox.style.display = "none";
+  document.getElementById("tapText").style.display = "none";
+
+  light.style.opacity = "1";
+
+  setTimeout(() => {
+    light.style.opacity = "0";
+    document.getElementById("message").style.display = "block";
+    startFloating();
+    showRoses();
+    startFireworks();   // 🔥 FIRE CRACKERS AT LAST
+  }, 900);
+}
+
+/* ---------- Floating Hearts & Balloons ---------- */
+function startFloating() {
+  setInterval(() => {
+    const el = document.createElement("div");
+    el.className = "float";
+    el.innerText = Math.random() > 0.5 ? "❤️" : "🎈";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = Math.random() * 22 + 20 + "px";
+    el.style.animationDuration = Math.random() * 3 + 4 + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 7000);
+  }, 400);
+}
+
+/* ---------- Roses ---------- */
+function showRoses() {
+  const left = document.createElement("div");
+  left.className = "rose";
+  left.style.left = "15px";
+  left.style.bottom = "40%";
+  left.innerText = "🌹";
+
+  const right = document.createElement("div");
+  right.className = "rose";
+  right.style.right = "15px";
+  right.style.bottom = "40%";
+  right.innerText = "🌹";
+
+  document.body.appendChild(left);
+  document.body.appendChild(right);
+}
+
+/* ---------- Fire Crackers (LAST) ---------- */
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+function startFireworks() {
+  setInterval(() => {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height * 0.5;
+
+    for (let i = 0; i < 90; i++) {
+      ctx.beginPath();
+      ctx.arc(x, y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `hsl(${Math.random()*360},100%,60%)`;
+      ctx.fill();
+    }
+  }, 700);
+}
+</script>
+
+</body>
+</html>

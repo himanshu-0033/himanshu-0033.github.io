@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy New Year Payel ❤️</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A New Year surprise made with love ❤️" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="countdown-lock">
+
+  <!-- =================================================
+       💖 HEART LOCK (FINAL MAGIC)
+  ================================================== -->
+  <div id="heartLock">
+    <div id="heartBox">❤️</div>
+    <p id="tapHint">Tap the heart 5 times</p>
+  </div>
+
+  <!-- Floating Hearts / Roses -->
+  <div id="heart-container"></div>
+
+  <!-- =================================================
+       🎵 AUDIO FILES
+  ================================================== -->
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ❤️ Heartbeat (Countdown) -->
+  <audio id="heartBeatSound" loop preload="auto">
+    <source src="audio/heartbeat.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- 💖 Love Music (After New Year) -->
+  <audio id="loveSound" loop preload="auto">
+    <source src="audio/love.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Music Toggle Button -->
+  <button class="music-btn" onclick="toggleMusic()" aria-label="Toggle Music">
+    🔊
+  </button>
+
+  <!-- =================================================
+       🔒 FULL SCREEN COUNTDOWN
+  ================================================== -->
+  <div class="countdown-screen" id="countdownScreen">
+    <div class="countdown-center">
+      <div id="timer" class="big-timer">00d 00h 00m 00s</div>
+      <p id="waitMessage" class="countdown-text">
+        Waiting for New Year to begin… ❤️
+      </p>
+    </div>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks"></canvas>
+  </div>
+
+  <!-- =================================================
+       🔓 MAIN CONTENT (AFTER COUNTDOWN)
+  ================================================== -->
+  <div id="newYearContent" style="display:none;">
+
+    <!-- Secret Line -->
+    <div id="secret" class="secret">
+      I Love You More Than Words Can Say 💕
+    </div>
+
+    <!-- Name -->
+    <h1 class="center-title">
+      Happy New Year <span class="name">Payel</span> ❤️
+    </h1>
+
+    <!-- HERO -->
+    <section class="section hero">
+      <h1>Happy New Year My Love ❤️</h1>
+      <p>
+        This year begins with you…<br>
+        and I want every year to stay the same.
+      </p>
+      <button onclick="scrollToSection('chats')">
+        Tap to Begin Our Story ✨
+      </button>
+    </section>
+
+    <!-- CHAT STORY -->
+    <section class="section chats" id="chats">
+      <h2>Our First Conversations 💬</h2>
+      <div class="chat-box" id="chatBox"></div>
+      <div class="typing" id="typing">
+        <span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <!-- SPECIAL VIDEO -->
+    <section class="section video-section" id="specialVideo">
+      <h2>A Little Something Before Memories 🎥</h2>
+
+      <div class="video-box">
+        <video id="memoryVideo" muted playsinline preload="metadata">
+          <source src="video/special.mp4" type="video/mp4" />
+        </video>
+        <div id="playBtn" onclick="playVideo()">▶</div>
+        <div id="soundBtn" onclick="toggleVideoSound()">🔇</div>
+      </div>
+
+      <p class="video-note">Tap play & turn on sound ❤️</p>
+    </section>
+
+    <!-- PHOTO MEMORIES -->
+    <section class="section gallery" id="gallery">
+      <h2>Our Memories 📸</h2>
+
+      <button id="memoryBtn" onclick="askPermission()">
+        Tap to see our memories 💕
+      </button>
+
+      <div id="permissionBox">
+        <p>Do you really want to see our memories? 🫶</p>
+        <div class="choices">
+          <button onclick="startMemories()">Yes ❤️</button>
+          <button onclick="skipMemories()">No 🙈</button>
+        </div>
+      </div>
+
+      <div class="slideshow" id="memorySlideshow"></div>
+      <p class="caption" id="caption"></p>
+    </section>
+
+    <!-- CHAT MEMORIES -->
+    <section class="section gallery" id="chatMemories">
+      <h2>Chat Memories 💬</h2>
+
+      <div id="chatAskBox">
+        <p>Do you want to see our chat memories? 🫶</p>
+        <div class="choices">
+          <button onclick="startChatMemories()">Yes ❤️</button>
+          <button onclick="skipChatMemories()">No 🙈</button>
+        </div>
+      </div>
+
+      <div id="chatViewer">
+        <img id="chatImage" alt="Chat Memory" />
+        <button id="chatNextBtn" onclick="nextChatImage()">Next ❤️</button>
+      </div>
+    </section>
+
+    <!-- SHAYARI -->
+    <section class="section shayari" id="shayari">
+      <h2>Our Story, One Feeling at a Time 📝</h2>
+      <div class="shayari-box">
+        <p id="shayariText"></p>
+      </div>
+      <button id="nextBtn" onclick="nextShayari()">Next ❤️</button>
+    </section>
+
+    <!-- SURPRISE -->
+    <section class="section surprise">
+      <button onclick="revealSurprise()">I Have Something For You 🎁</button>
+      <div id="reveal">
+        <h2>Will you stay with me in every New Year of my life? ❤️</h2>
+        <div class="choices">
+          <button onclick="yesClicked()">Yes 💖</button>
+          <button onclick="yesClicked()">Always ♾️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="section final">
+      <h2>You are my today, my tomorrow, and all my New Years.</h2>
+      <button onclick="goToFinalPage()">Continue 🎆</button>
+      <p>— Yours, forever Himanshu 💍</p>
+    </section>
+
+  </div>
+
+  <!-- FINAL LOCKED OVERLAY -->
+  <div id="finalOverlay">
+    <div class="final-card">
+      <div class="ring">💍</div>
+      <h2>One last thing…</h2>
+      <p id="lockedText">
+        This message unlocks only<br>if you choose “Always”
+      </p>
+      <button id="unlockBtn" onclick="showHeartLock()">Always ♾️</button>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>

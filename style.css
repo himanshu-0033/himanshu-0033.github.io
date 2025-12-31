@@ -1,0 +1,394 @@
+/* =====================================================
+   GLOBAL RESET
+===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, #ffdde1, #fff);
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Lock scroll during countdown */
+body.countdown-lock {
+  overflow: hidden;
+}
+
+/* =====================================================
+   SECTION LAYOUT
+===================================================== */
+.section {
+  min-height: 100vh;
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* =====================================================
+   HERO & HEADINGS
+===================================================== */
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5rem;
+  color: #e63946;
+  text-shadow: 0 0 18px rgba(255, 77, 109, 0.6);
+}
+
+.hero p {
+  margin: 20px 0;
+  font-size: 1.1rem;
+}
+
+.center-title {
+  text-align: center;
+  margin: 40px 0;
+}
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+button {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(45deg, #ff4d6d, #e63946);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 25px rgba(230,57,70,0.35);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(230,57,70,0.45);
+}
+
+/* =====================================================
+   CHAT SECTION
+===================================================== */
+.chat-box {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat {
+  padding: 12px 18px;
+  border-radius: 20px;
+  margin: 8px 0;
+  max-width: 80%;
+  animation: fadeIn 0.5s ease;
+}
+
+.chat.left {
+  background: #fff;
+  align-self: flex-start;
+}
+
+.chat.right {
+  background: #ffe3e3;
+  align-self: flex-end;
+}
+
+/* Typing dots */
+.typing {
+  display: none;
+  margin-top: 10px;
+}
+
+.typing span {
+  width: 8px;
+  height: 8px;
+  margin: 0 3px;
+  background: #aaa;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.4s infinite both;
+}
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+/* =====================================================
+   PHOTO SLIDESHOW (NO CROP)
+===================================================== */
+.slideshow {
+  position: relative;
+  width: 280px;
+  margin: 30px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  display: none;
+  object-fit: contain;
+}
+
+.slide.active {
+  display: block;
+}
+
+.caption {
+  margin-top: 15px;
+  color: #e63946;
+  font-size: 1.1rem;
+}
+
+/* =====================================================
+   SHAYARI
+===================================================== */
+.shayari-box {
+  min-height: 140px;
+  margin: 30px auto;
+  max-width: 750px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#shayariText {
+  font-size: 1.35rem;
+  color: #b5179e;
+  line-height: 1.9;
+  text-align: center;
+}
+
+#nextBtn {
+  display: none;
+  margin-top: 20px;
+}
+
+/* =====================================================
+   VIDEO SECTION
+===================================================== */
+.video-section {
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(6px);
+}
+
+.video-box {
+  position: relative;
+  width: 300px;
+  max-width: 95%;
+  margin: 25px auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+.video-box video {
+  width: 100%;
+  display: block;
+}
+
+#playBtn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+  color: white;
+  background: rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+
+#soundBtn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 22px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 50%;
+  display: none;
+}
+
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+.music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #e63946;
+  color: white;
+  font-size: 22px;
+  z-index: 100;
+}
+
+/* =====================================================
+   HEARTS & ROSES MAGIC
+===================================================== */
+#heart-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.heart, .rose {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp 6s linear infinite;
+}
+
+.heart {
+  color: rgba(255,0,100,0.7);
+}
+
+.rose {
+  color: #ff4d6d;
+  font-size: 22px;
+  animation-duration: 8s;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh) scale(1); opacity: 1; }
+  to { transform: translateY(-10vh) scale(1.3); opacity: 0; }
+}
+
+/* =====================================================
+   FULLSCREEN COUNTDOWN
+===================================================== */
+.countdown-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #000 0%, #000 60%, #12000a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.countdown-center {
+  text-align: center;
+}
+
+.big-timer {
+  font-size: 5rem;
+  font-weight: 800;
+  color: #ff4d6d;
+  letter-spacing: 4px;
+  text-shadow:
+    0 0 20px rgba(255,77,109,0.9),
+    0 0 45px rgba(255,77,109,0.7);
+  animation: heartbeat 1.2s infinite;
+}
+
+.countdown-text {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  color: #ffb3c6;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.08); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* =====================================================
+   FIREWORKS CANVAS
+===================================================== */
+#fireworks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* =====================================================
+   FINAL HEART LOCK (TAP 5 TIMES)
+===================================================== */
+#heartLock {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+}
+
+#heartBox {
+  font-size: 90px;
+  cursor: pointer;
+  animation: heartbeat 1.2s infinite;
+  filter: drop-shadow(0 0 25px #ff4d6d);
+}
+
+#tapHint {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  color: #ffb3c6;
+}
+
+/* =====================================================
+   FINAL OVERLAY
+===================================================== */
+#finalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.final-card {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 380px;
+}
+
+.ring {
+  font-size: 50px;
+  animation: ringPulse 1.5s infinite;
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* =====================================================
+   COMMON ANIMATIONS
+===================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
